@@ -28,16 +28,16 @@ namespace complete_me
                 {
                     Console.WriteLine("Du valde att avsluta programmet...");
                     Console.WriteLine("Progarmmet avlsutas!");
-                    System.Environment.Exit(0);
+                    System.Environment.Exit(0); //För att avsluta programmet efter (0) ms
                 }
                 else
                 {
                     try
                     {
-                        ValidDeterminer(tal, inttal);
+                        ValidDeterminer(tal, inttal); //Metod för att se om det crashar
                         inttal = int.Parse(tal);
-                        //Försöker parsa, om det inte går har användaren
-                    }                                        //inte matat en siffra..
+                        
+                    }                                        
                     catch (Exception myException)
                     {
                         Console.WriteLine(myException.Message, myException.StackTrace);
@@ -83,7 +83,7 @@ namespace complete_me
         }
         public static void ValidDeterminer(string tal, int inttal)
         {
-            if (!int.TryParse(tal, out inttal))
+            if (!int.TryParse(tal, out inttal)) //Försöker parsa, om det inte går har användaren gjort en felaktig inmatning.
                 throw myException;
         }
     }
