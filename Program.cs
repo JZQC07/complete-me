@@ -8,6 +8,7 @@ namespace complete_me
 {
     class Program
     {
+        static Exception myException = new Exception("Du måste mata in ett heltal!"); //Skapar eget exception
         static void Main()
         {
             Menu();
@@ -18,7 +19,6 @@ namespace complete_me
             int speltal = slumpat.Next(1, 20); //Här behöver vi bestämma rangen för de slumpade numrena.
             int inttal = 0;
             string tal = "";
-
             while (true) //Skall köras ända tills användaren matar in q eller Q.
             {
                 Console.Write("\n\tGissa på ett tal mellan 1 och 20: ");
@@ -30,46 +30,61 @@ namespace complete_me
                     Console.WriteLine("Progarmmet avlsutas!");
                     System.Environment.Exit(0);
                 }
-                try
+                else
                 {
-                    inttal = int.Parse(tal); //Försöker parsa, om det inte går har användaren
-                }                                        //inte matat en siffra..
-                catch
-                {
-                    Console.WriteLine("Felaktig inmatning!");
-                }
-                if (speltal > inttal && inttal < 1)
-                {
-                    Console.WriteLine("Ditt angivna tal måste vara större än 0!");
-                }
-                else if (speltal > inttal)
-                {
-                    Console.WriteLine("\tDet inmatade talet " + inttal + " är för litet, försök igen.");
-                }
-                else if (inttal > speltal && inttal > 20)
-                {
-                    Console.WriteLine("Ditt inmatade tal får inte vara större än 20!");
-                }
-                else if (inttal > speltal)
-                {
-                    Console.WriteLine("\tDet inmatade talet " + inttal + " är för stort, försök igen.");
-                }
-                else if (inttal == speltal)
-                {
-                    Console.WriteLine("\tGrattis, du gissade rätt!");
-                    Console.WriteLine("För att spela igen, mata in valfri tangent.");
-                    Console.WriteLine("Annars mata in Q.");
-                    string avsluta = Console.ReadLine().ToUpper();
-                    if(avsluta == "Q")
+                    try
                     {
-                        System.Environment.Exit(0);
+                        ValidDeterminer(tal, inttal);
+                        inttal = int.Parse(tal);
+                        //Försöker parsa, om det inte går har användaren
+                    }                                        //inte matat en siffra..
+                    catch (Exception myException)
+                    {
+                        Console.WriteLine(myException.Message, myException.StackTrace);
+
                     }
-                    else
+                    if (speltal > inttal && inttal < 1 && inttal != 0)
                     {
-                        Menu(); //Återgår till Menu metoden för att starta spelet igen!
+                        Console.WriteLine("Ditt angivna tal måste vara större än 0!");
+                    }
+                    else if (inttal == 0) //Om man matar in 0 ska man bara ombes att gissa mellan 1-20!
+                    {
+                        
+                    }
+                    else if (speltal > inttal && inttal != 0)
+                    {
+                        Console.WriteLine("\tDet inmatade talet " + inttal + " är för litet, försök igen.");
+                    }
+                    else if (inttal > speltal && inttal > 20)
+                    {
+                        Console.WriteLine("Ditt inmatade tal får inte vara större än 20!");
+                    }
+                    else if (inttal > speltal)
+                    {
+                        Console.WriteLine("\tDet inmatade talet " + inttal + " är för stort, försök igen.");
+                    }
+                    else if (inttal == speltal)
+                    {
+                        Console.WriteLine("\tGrattis, du gissade rätt!");
+                        Console.WriteLine("För att spela igen, mata in valfri tangent.");
+                        Console.WriteLine("Annars mata in Q.");
+                        string avsluta = Console.ReadLine().ToUpper();
+                        if (avsluta == "Q")
+                        {
+                            System.Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Menu(); //Återgår till Menu metoden för att starta spelet igen!
+                        }
                     }
                 }
             }
+        }
+        public static void ValidDeterminer(string tal, int inttal)
+        {
+            if (!int.TryParse(tal, out inttal))
+                throw myException;
         }
     }
 }
