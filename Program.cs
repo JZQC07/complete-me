@@ -19,7 +19,7 @@ namespace complete_me
             int inttal = 0;
             string tal = "";
 
-            while (true) //Loopen skall köras när spela inte är true (false)
+            while (true) //Skall köras ända tills användaren matar in q eller Q.
             {
                 Console.Write("\n\tGissa på ett tal mellan 1 och 20: ");
                 Console.WriteLine("Mata när som helst in Q för att avsluta programmet.");
@@ -36,7 +36,7 @@ namespace complete_me
                 }                                        //inte matat en siffra..
                 catch
                 {
-                    Console.WriteLine("Fel format"); //Här skall finnas throw!
+                    Console.WriteLine("Felaktig inmatning!");
                 }
                 if (speltal > inttal && inttal < 1)
                 {
@@ -66,7 +66,7 @@ namespace complete_me
                     }
                     else
                     {
-                        Menu();
+                        Menu(); //Återgår till Menu metoden för att starta spelet igen!
                     }
                 }
             }
