@@ -36,12 +36,11 @@ namespace complete_me
                     {
                         ValidDeterminer(tal, inttal); //Metod för att se om det crashar
                         inttal = int.Parse(tal);
-                        
                     }                                        
                     catch (Exception myException)
                     {
-                        Console.WriteLine(myException.Message, myException.StackTrace);
-
+                        Console.WriteLine(myException.Message + "  ");
+                        Console.WriteLine("Felet hittades:" + myException.StackTrace);
                     }
                     if (speltal > inttal && inttal < 1 && inttal != 0)
                     {
