@@ -16,7 +16,7 @@ namespace complete_me
         public static void Menu()
         {
             Random slumpat = new Random();
-            int speltal = slumpat.Next(1, 20); //Här behöver vi bestämma rangen för de slumpade numrena.
+            int speltal = slumpat.Next(1, 21); //Här behöver vi bestämma rangen för de slumpade numrena.
             int inttal = 0;
             string tal = "";
             while (true) //Skall köras ända tills användaren matar in q eller Q.
